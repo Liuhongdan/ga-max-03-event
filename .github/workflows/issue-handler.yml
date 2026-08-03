@@ -1,0 +1,23 @@
+
+name: Issue Handler
+
+on:
+  issues:
+    types: [opened, edited, milestoned, closed]
+
+jobs:
+  issues open:
+    if github.event.action = "opened"
+    runs-on: ubuntu-latest
+    steps:
+      - name: new issues
+        run: |
+          echo "Issue opened"
+          echo "${{ toJSON(github.event) }}"
+
+  issues close:
+    if github.event.action = "closed"
+    runs-on: ubuntu-latest
+    steps:
+      - name: issues closed
+        run: echo "Issue closed"
